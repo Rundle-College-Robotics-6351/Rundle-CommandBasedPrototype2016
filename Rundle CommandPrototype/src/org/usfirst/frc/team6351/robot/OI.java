@@ -13,10 +13,10 @@ import org.usfirst.frc.team6351.robot.commands.RetractPiston;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	Joystick driver1 = new Joystick(1);
+	public Joystick driver1 = new Joystick(1);
 	
-	Button driverA = new JoystickButton(driver1, 2);
-	Button driverB = new JoystickButton(driver1, 3);
+	public Button driverA = new JoystickButton(driver1, 2);
+	public Button driverB = new JoystickButton(driver1, 3);
 	
 	public OI() {
 
