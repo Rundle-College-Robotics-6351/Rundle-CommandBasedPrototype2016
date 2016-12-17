@@ -17,4 +17,9 @@ public class RobotMap {
     // public static int rangefinderModule = 1;
 	public static final double Tank_Drive_Scaling_Teleop = 0.4;
 	public static final double Tank_Drive_Scaling_Auto = 0.4;
+	
+	public static final int Motor_Front_Left = 1;
+	public static final int Motor_Back_Left = 2;
+	public static final int Motor_Front_Right = 3;
+	public static final int Motor_Back_Right = 4;
 }
