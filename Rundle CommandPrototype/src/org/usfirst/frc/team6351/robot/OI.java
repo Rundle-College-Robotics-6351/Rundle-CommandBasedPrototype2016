@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team6351.robot.commands.ExampleCommand;
 import org.usfirst.frc.team6351.robot.commands.ExtendPiston;
 import org.usfirst.frc.team6351.robot.commands.RetractPiston;
 
