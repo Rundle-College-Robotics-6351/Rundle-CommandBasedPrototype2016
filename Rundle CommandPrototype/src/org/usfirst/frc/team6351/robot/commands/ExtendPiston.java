@@ -12,7 +12,7 @@ public class ExtendPiston extends Command {
 
     public ExtendPiston() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
+        //requires(Robot.exampleSubsystem);
     }
 
     // Called just before this Command runs the first time
