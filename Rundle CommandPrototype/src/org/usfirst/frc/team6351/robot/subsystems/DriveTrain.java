@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team6351.robot.subsystems;
 
+import org.usfirst.frc.team6351.robot.Robot;
+import org.usfirst.frc.team6351.robot.RobotMap;
 import org.usfirst.frc.team6351.robot.commands.BeginDrive;
 
 import edu.wpi.first.wpilibj.Victor;
@@ -15,11 +17,11 @@ public class DriveTrain extends Subsystem {
     // here. Call these from Commands.
 	
 	//Left Motors
-    Victor frontLeft = new Victor(1);
-    Victor backLeft = new Victor(2);
+    Victor frontLeft = new Victor(RobotMap.Motor_Front_Left);
+    Victor backLeft = new Victor(RobotMap.Motor_Back_Left);
     //Right Motors
-    Victor frontRight = new Victor(3);
-    Victor backRight = new Victor(4);
+    Victor frontRight = new Victor(RobotMap.Motor_Front_Right);
+    Victor backRight = new Victor(RobotMap.Motor_Back_Right);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
