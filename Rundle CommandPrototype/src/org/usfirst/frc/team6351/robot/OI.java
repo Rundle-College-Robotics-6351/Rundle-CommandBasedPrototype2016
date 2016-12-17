@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6351.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -20,7 +21,7 @@ public class OI {
 	public OI() {
 
 		driverA.whenPressed(new ExtendPiston());
-		driverA.whenPressed(new RetractPiston());
+		driverB.whenPressed(new RetractPiston());
 	}
 	//Method for getting an axis value on the driver joystick
 		public double driverAxisValue (int axis) {
