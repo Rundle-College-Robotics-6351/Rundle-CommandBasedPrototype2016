@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team6351.robot.commands;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team6351.robot.Robot;
@@ -10,13 +11,19 @@ import org.usfirst.frc.team6351.robot.Robot;
  */
 public class ExtendPiston extends Command {
 
+	Solenoid s1;
+	Solenoid s2;
+	
     public ExtendPiston() {
         // Use requires() here to declare subsystem dependencies
-        //requires(Robot.exampleSubsystem);
+        requires(Robot.pneumatics);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	s1 = new Solenoid(4);
+    	
+    	s1.set(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -25,7 +32,7 @@ public class ExtendPiston extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
