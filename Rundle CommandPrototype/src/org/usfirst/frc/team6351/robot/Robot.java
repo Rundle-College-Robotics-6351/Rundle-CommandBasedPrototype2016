@@ -10,6 +10,8 @@ import org.usfirst.frc.team6351.robot.commands.AutoFwdSpinComeBack;
 import org.usfirst.frc.team6351.robot.commands.TankDrive;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6351.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team6351.robot.subsystems.Pneumatics;
+
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static final DriveTrain driveTrain = new DriveTrain();
+	public static final Pneumatics pneumatics = new Pneumatics();
 	public static OI oi;
 
     Command autonomousStart;
@@ -38,6 +41,7 @@ public class Robot extends IterativeRobot {
 		autoMode = new SendableChooser();
 		autoMode.addDefault("ForwardSpinComeBack", new AutoFwdSpinComeBack());
         SmartDashboard.putData("Auto mode", autoMode);
+        pneumatics.start();
     }
 	
 	/**
@@ -103,8 +107,13 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.putNumber("Left Joystick Y", Robot.oi.driver1.getRawAxis(1));
-        SmartDashboard.putNumber("Right Joystick Y", Robot.oi.driver1.getRawAxis(3));
+        SmartDashboard.putNumber("Left Joystick Y", oi.driver1.getRawAxis(1));
+        SmartDashboard.putNumber("Right Joystick Y", oi.driver1.getRawAxis(3));
+        
+        SmartDashboard.putBoolean("Compressor Enabled", pneumatics.getEnabled());
+        SmartDashboard.putBoolean("Compressor Not Connected Fault", pneumatics.getConnectionFault());
+        SmartDashboard.putBoolean("Compressor Current Fault", pneumatics.getCurrentFault());
+        SmartDashboard.putBoolean("Compressor Shorted Fault", pneumatics.getShortFault());
     }
     
     /**
