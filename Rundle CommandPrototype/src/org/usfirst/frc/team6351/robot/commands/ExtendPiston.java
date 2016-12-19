@@ -14,20 +14,22 @@ public class ExtendPiston extends Command {
 	Solenoid s1;
 	Solenoid s2;
 	
-    public ExtendPiston() {
+    public ExtendPiston(Solenoid funcS1) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.pneumatics);
+        
+        s1 = funcS1;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	s1 = new Solenoid(4);
     	
     	s1.set(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
