@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import org.usfirst.frc.team6351.robot.commands.AutoFwdSpinComeBack;
 import org.usfirst.frc.team6351.robot.commands.TankDrive;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team6351.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team6351.robot.subsystems.Pneumatics;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;

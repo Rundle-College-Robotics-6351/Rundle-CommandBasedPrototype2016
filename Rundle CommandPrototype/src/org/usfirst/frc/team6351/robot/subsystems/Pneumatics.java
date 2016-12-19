@@ -2,7 +2,6 @@
 package org.usfirst.frc.team6351.robot.subsystems;
 
 import org.usfirst.frc.team6351.robot.Robot;
-import org.usfirst.frc.team6351.robot.OI;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
