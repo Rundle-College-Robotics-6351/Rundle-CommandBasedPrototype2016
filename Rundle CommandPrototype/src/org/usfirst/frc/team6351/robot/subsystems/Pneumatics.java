@@ -29,6 +29,7 @@ public class Pneumatics extends Subsystem {
     public void start() {
 		if (Robot.isReal()) {
 			compressor.start();
+			compressor.setClosedLoopControl(true);
 			
 		}
 	}
