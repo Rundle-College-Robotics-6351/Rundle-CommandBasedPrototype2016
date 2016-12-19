@@ -26,7 +26,7 @@ public class TankDrive extends Command {
     	double rightSpeed = Robot.oi.driverAxisValue(RobotMap.Joystick_Right_Y_Axis)*(RobotMap.Tank_Drive_Scaling_Teleop);
     	
     	Robot.driveTrain.setLeft(leftSpeed);
-    	Robot.driveTrain.setLeft(rightSpeed);
+    	Robot.driveTrain.setRight(rightSpeed);
     	
     }
 
