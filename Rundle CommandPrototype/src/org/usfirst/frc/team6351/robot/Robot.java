@@ -21,6 +21,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
+/**
+ * Rundle College Team 6351, 2016
+ * Code for Prototype Robot
+ * Programmed in Java by Davis Carlson and Max Gilmour
+ * 
+ */
+
 public class Robot extends IterativeRobot {
 
 	public static final DriveTrain driveTrain = new DriveTrain();
