@@ -5,32 +5,37 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team6351.robot.commands.ExtendPiston;
-import org.usfirst.frc.team6351.robot.commands.RetractPiston;
+import org.usfirst.frc.team6351.robot.commands.ActivateBothCylinders;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+
+/**
+ * Rundle College Team 6351, 2016
+ * Code for Prototype Robot
+ * Programmed in Java by Davis Carlson and Max Gilmour
+ * 
+ */
+
 public class OI {
 	public Joystick driver1 = new Joystick(0);
 	
-	public Button driverA = new JoystickButton(driver1, 2);
-	public Button driverB = new JoystickButton(driver1, 3);
-	public Button driverX = new JoystickButton(driver1, 1);
-	public Button driverY = new JoystickButton(driver1, 4);
+	public Button driverA = new JoystickButton(driver1, RobotMap.Controller1_A_Button);
+	public Button driverB = new JoystickButton(driver1, RobotMap.Controller1_B_Button);
+	public Button driverX = new JoystickButton(driver1, RobotMap.Controller1_X_Button);
+	public Button driverY = new JoystickButton(driver1, RobotMap.Controller1_Y_Button);
 	
-	Solenoid s1 = new Solenoid(4);
-	Solenoid s2 = new Solenoid(3);
+	Solenoid s1 = new Solenoid(RobotMap.Solenoid_1);
+	Solenoid s2 = new Solenoid(RobotMap.Solenoid_2);
 	
 	public OI() {
 
 		//driverA.whenPressed(new ExtendPiston());
 		//driverB.whenPressed(new RetractPiston());
-		driverA.whenPressed(new ExtendPiston(s1));
-		driverB.whenPressed(new RetractPiston(s1));
-		driverX.whenPressed(new ExtendPiston(s2));
-		driverY.whenPressed(new RetractPiston(s2));
+		driverA.whenPressed(new ActivateBothCylinders(s1,s2,"extend","extend"));
+		driverB.whenPressed(new ActivateBothCylinders(s1,s2,"retract","retract"));
 		
 	}
 	//Method for getting an axis value on the driver joystick
