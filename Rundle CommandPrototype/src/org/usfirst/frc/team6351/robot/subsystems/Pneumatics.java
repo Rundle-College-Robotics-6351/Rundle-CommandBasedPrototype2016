@@ -10,6 +10,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
+
+/**
+ * Rundle College Team 6351, 2016
+ * Code for Prototype Robot
+ * Programmed in Java by Davis Carlson and Max Gilmour
+ * 
+ */
+
 public class Pneumatics extends Subsystem {
 	Compressor compressor;
 	Solenoid s1;
