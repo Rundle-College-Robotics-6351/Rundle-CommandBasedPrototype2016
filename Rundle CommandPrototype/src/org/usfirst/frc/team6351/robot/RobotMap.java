@@ -5,6 +5,14 @@ package org.usfirst.frc.team6351.robot;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
+
+/**
+ * Rundle College Team 6351, 2016
+ * Code for Prototype Robot
+ * Programmed in Java by Davis Carlson and Max Gilmour
+ * 
+ */
+
 public class RobotMap {
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
@@ -23,6 +31,14 @@ public class RobotMap {
 	public static final int Motor_Front_Right = 3;
 	public static final int Motor_Back_Right = 4;
 	
-	public static final int Joystick_Left_Y_Axis = 1;
-	public static final int Joystick_Right_Y_Axis = 3;
+	public static final int Solenoid_1 = 4;
+	public static final int Solenoid_2 = 3;
+	
+	public static final int Controller1_Left_Y_Axis = 1;
+	public static final int Controller1_Right_Y_Axis = 3;
+	
+	public static final int Controller1_A_Button = 2;
+	public static final int Controller1_B_Button = 3;
+	public static final int Controller1_X_Button = 1;
+	public static final int Controller1_Y_Button = 4;
 }
