@@ -9,6 +9,14 @@ import org.usfirst.frc.team6351.robot.RobotMap;
 /**
  *
  */
+
+/**
+ * Rundle College Team 6351, 2016
+ * Code for Prototype Robot
+ * Programmed in Java by Davis Carlson and Max Gilmour
+ * 
+ */
+
 public class TankDrive extends Command {
 
     public TankDrive() {
@@ -22,8 +30,8 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftSpeed = Robot.oi.driverAxisValue(RobotMap.Joystick_Left_Y_Axis)*(RobotMap.Tank_Drive_Scaling_Teleop)*(-1);
-    	double rightSpeed = Robot.oi.driverAxisValue(RobotMap.Joystick_Right_Y_Axis)*(RobotMap.Tank_Drive_Scaling_Teleop);
+    	double leftSpeed = Robot.oi.driverAxisValue(RobotMap.Controller1_Left_Y_Axis)*(RobotMap.Tank_Drive_Scaling_Teleop)*(-1);
+    	double rightSpeed = Robot.oi.driverAxisValue(RobotMap.Controller1_Right_Y_Axis)*(RobotMap.Tank_Drive_Scaling_Teleop);
     	
     	Robot.driveTrain.setLeft(leftSpeed);
     	Robot.driveTrain.setRight(rightSpeed);
