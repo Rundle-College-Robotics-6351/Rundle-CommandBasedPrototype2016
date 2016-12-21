@@ -24,7 +24,11 @@ public class RobotMap {
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
 	public static final double Tank_Drive_Scaling_Teleop = 0.4;
-	public static final double Tank_Drive_Scaling_Auto = 0.4;
+	public static final double Drive_Scaling_Auto = 0.4;
+	public static final double Tank_Drive_Precision_Scaling_Teleop = 0.2;
+	
+	public static final double GTA_Drive_Scaling_Teleop = 0.4;
+	public static final double GTA_Drive_Precision_Scaling_Teleop = 0.2;
 	
 	public static final int Motor_Front_Left = 1;
 	public static final int Motor_Back_Left = 2;
@@ -36,9 +40,15 @@ public class RobotMap {
 	
 	public static final int Controller1_Left_Y_Axis = 1;
 	public static final int Controller1_Right_Y_Axis = 3;
+	//WARNING! CONFIRM BEFORE RUNNING
+	public static final int Controller1_Left_X_Axis = 2;
+	public static final int Controller1_Right_X_Axis = 4;
 	
 	public static final int Controller1_A_Button = 2;
 	public static final int Controller1_B_Button = 3;
 	public static final int Controller1_X_Button = 1;
 	public static final int Controller1_Y_Button = 4;
+	
+	public static final double TELEOP_MAX_ROBOT_SPEED = 0.99;
+	public static final double TELEOP_MIN_ROBOT_SPEED = -0.99;
 }
