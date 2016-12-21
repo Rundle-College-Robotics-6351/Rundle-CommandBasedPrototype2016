@@ -27,26 +27,26 @@ public class AutoFwdSpinComeBack extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.setLeft(RobotMap.Tank_Drive_Scaling_Auto*-1);
-    	Robot.driveTrain.setRight(RobotMap.Tank_Drive_Scaling_Auto);
+    	Robot.driveTrain.setLeft(RobotMap.Drive_Scaling_Auto*-1);
+    	Robot.driveTrain.setRight(RobotMap.Drive_Scaling_Auto);
 		Timer.delay(2);
     	Robot.driveTrain.setLeft(0);
     	Robot.driveTrain.setRight(0);
 		//Spin 180
-    	Robot.driveTrain.setLeft(RobotMap.Tank_Drive_Scaling_Auto);
-    	Robot.driveTrain.setRight(RobotMap.Tank_Drive_Scaling_Auto);
+    	Robot.driveTrain.setLeft(RobotMap.Drive_Scaling_Auto);
+    	Robot.driveTrain.setRight(RobotMap.Drive_Scaling_Auto);
 		Timer.delay(1);
     	Robot.driveTrain.setLeft(0);
     	Robot.driveTrain.setRight(0);
 		//Come Back
-    	Robot.driveTrain.setLeft(RobotMap.Tank_Drive_Scaling_Auto*-1);
-    	Robot.driveTrain.setRight(RobotMap.Tank_Drive_Scaling_Auto);
+    	Robot.driveTrain.setLeft(RobotMap.Drive_Scaling_Auto*-1);
+    	Robot.driveTrain.setRight(RobotMap.Drive_Scaling_Auto);
 		Timer.delay(2);
     	Robot.driveTrain.setLeft(0);
     	Robot.driveTrain.setRight(0);
 		//Spin 180
-    	Robot.driveTrain.setLeft(RobotMap.Tank_Drive_Scaling_Auto);
-    	Robot.driveTrain.setRight(RobotMap.Tank_Drive_Scaling_Auto);
+    	Robot.driveTrain.setLeft(RobotMap.Drive_Scaling_Auto);
+    	Robot.driveTrain.setRight(RobotMap.Drive_Scaling_Auto);
 		Timer.delay(1);
     	Robot.driveTrain.setLeft(0);
     	Robot.driveTrain.setRight(0);
