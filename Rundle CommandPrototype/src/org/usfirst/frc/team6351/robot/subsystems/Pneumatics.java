@@ -2,6 +2,7 @@
 package org.usfirst.frc.team6351.robot.subsystems;
 
 import org.usfirst.frc.team6351.robot.Robot;
+import org.usfirst.frc.team6351.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -20,8 +21,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Pneumatics extends Subsystem {
 	Compressor compressor;
-	Solenoid s1;
-	Solenoid s2;
+	public Solenoid s1 = new Solenoid(RobotMap.Solenoid_1);
+	public Solenoid s2 = new Solenoid(RobotMap.Solenoid_2);
 	
 	public Pneumatics(){
 		compressor = new Compressor();
