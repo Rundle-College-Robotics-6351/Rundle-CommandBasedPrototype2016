@@ -27,15 +27,12 @@ public class OI {
 	public Button driverX = new JoystickButton(driver1, RobotMap.Controller1_X_Button);
 	public Button driverY = new JoystickButton(driver1, RobotMap.Controller1_Y_Button);
 	
-	Solenoid s1 = new Solenoid(RobotMap.Solenoid_1);
-	Solenoid s2 = new Solenoid(RobotMap.Solenoid_2);
-	
 	public OI() {
 
 		//driverA.whenPressed(new ExtendPiston());
 		//driverB.whenPressed(new RetractPiston());
-		driverA.whenPressed(new ActivateBothCylinders(s1,s2,"extend","extend"));
-		driverB.whenPressed(new ActivateBothCylinders(s1,s2,"retract","retract"));
+		driverA.whenPressed(new ActivateBothCylinders(Robot.pneumatics.s1,Robot.pneumatics.s2,"extend","extend"));
+		driverB.whenPressed(new ActivateBothCylinders(Robot.pneumatics.s1,Robot.pneumatics.s2,"retract","retract"));
 		
 	}
 	//Method for getting an axis value on the driver joystick
