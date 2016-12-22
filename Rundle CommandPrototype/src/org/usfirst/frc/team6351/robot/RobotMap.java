@@ -39,10 +39,13 @@ public class RobotMap {
 	public static final int Solenoid_2 = 3;
 	
 	public static final int Controller1_Left_Y_Axis = 1;
-	public static final int Controller1_Right_Y_Axis = 3;
+	public static final int Controller1_Right_Y_Axis = 5;
 	//WARNING! CONFIRM BEFORE RUNNING
-	public static final int Controller1_Left_X_Axis = 2;
+	public static final int Controller1_Left_X_Axis = 0;
 	public static final int Controller1_Right_X_Axis = 4;
+	
+	public static final int Controller1_Right_Trigger = 3;
+	public static final int Controller1_Left_Trigger = 2;
 	
 	public static final int Controller1_A_Button = 2;
 	public static final int Controller1_B_Button = 3;
