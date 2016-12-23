@@ -23,8 +23,8 @@ public class PrecisionGTADrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	double rightTrigger = 0.0;
-    	double leftTrigger = 0.0;
+    	double rightTrigger = Robot.oi.driverAxisValue(RobotMap.Controller1_Right_Trigger);
+    	double leftTrigger = Robot.oi.driverAxisValue(RobotMap.Controller1_Left_Trigger);
     	double leftJoystickXAxis = Robot.oi.driverAxisValue(RobotMap.Controller1_Left_X_Axis);
     	   
     	//Creating motor variables
