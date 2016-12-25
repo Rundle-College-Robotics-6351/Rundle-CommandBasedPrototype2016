@@ -6,12 +6,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import org.usfirst.frc.team6351.robot.commands.AutoDoNotMove;
 import org.usfirst.frc.team6351.robot.commands.AutoFwdSpinComeBack;
 import org.usfirst.frc.team6351.robot.commands.AutoTestMovement;
 import org.usfirst.frc.team6351.robot.commands.TankDrive;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6351.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team6351.robot.subsystems.Sensors;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final Pneumatics pneumatics = new Pneumatics();
+	public static final Sensors sensors = new Sensors();
 	public static OI oi;
 
     Command autonomousStart;
@@ -49,8 +50,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		autoMode = new SendableChooser();
 		autoMode.addDefault("ForwardSpinComeBack", new AutoFwdSpinComeBack());
-		autoMode.addObject("Test Mode: No Movement", new AutoDoNotMove());
-		autoMode.addObject("Test Mode: Movement", new AutoTestMovement());
+		autoMode.addObject("TEST MODE", new AutoTestMovement());
         SmartDashboard.putData("Auto mode", autoMode);
         pneumatics.start();
     }
