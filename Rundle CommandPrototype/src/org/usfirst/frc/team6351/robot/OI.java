@@ -1,7 +1,6 @@
 package org.usfirst.frc.team6351.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -31,8 +30,8 @@ public class OI {
 
 		//driverA.whenPressed(new ExtendPiston());
 		//driverB.whenPressed(new RetractPiston());
-		driverA.whenPressed(new ActivateBothCylinders(Robot.pneumatics.s1,Robot.pneumatics.s2,"extend","extend"));
-		driverB.whenPressed(new ActivateBothCylinders(Robot.pneumatics.s1,Robot.pneumatics.s2,"retract","retract"));
+		driverA.whenPressed(new ActivateBothCylinders(true, true));
+		driverB.whenPressed(new ActivateBothCylinders(false, false));
 		
 	}
 	//Method for getting an axis value on the driver joystick
