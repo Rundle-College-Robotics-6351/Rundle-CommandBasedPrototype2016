@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team6351.robot.Robot;
-import org.usfirst.frc.team6351.robot.RobotMap;
 
 /**
  *
