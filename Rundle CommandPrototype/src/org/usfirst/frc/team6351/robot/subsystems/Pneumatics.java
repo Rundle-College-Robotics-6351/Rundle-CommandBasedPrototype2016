@@ -54,6 +54,18 @@ public class Pneumatics extends Subsystem {
     public boolean getShortFault() {
     	return compressor.getCompressorShortedFault();
     }
+    
+    //TESTING METHOD
+    public void activateCylinder(Solenoid s, boolean op) {
+    	s.set(op);
+    }
+    //---------------------------------
+    public void activateCylinder1(boolean op) {
+    	s1.set(op);
+    }
+    public void activateCylinder2(boolean op) {
+    	s2.set(op);
+    }
 
 }
 
