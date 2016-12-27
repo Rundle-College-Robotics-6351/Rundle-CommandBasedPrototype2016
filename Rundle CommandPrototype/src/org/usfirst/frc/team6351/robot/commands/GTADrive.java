@@ -31,7 +31,26 @@ public class GTADrive extends Command {
     	double leftMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.GTA_Drive_Scaling_Teleop*(-1);
     	double rightMotors = (rightTrigger - leftTrigger + leftJoystickXAxis)*RobotMap.GTA_Drive_Scaling_Teleop;
     	
-    	
+    	if (leftMotors > RobotMap.TELEOP_MAX_ROBOT_SPEED) {
+    		   
+    		leftMotors = RobotMap.TELEOP_MAX_ROBOT_SPEED;
+    		   
+    	}
+    	if (rightMotors > RobotMap.TELEOP_MAX_ROBOT_SPEED) {
+    		   
+    		rightMotors = RobotMap.TELEOP_MAX_ROBOT_SPEED;
+    		   
+    	}
+    	   if (leftMotors < RobotMap.TELEOP_MIN_ROBOT_SPEED) {
+    		   
+    		leftMotors = RobotMap.TELEOP_MIN_ROBOT_SPEED;
+    		   
+    	}
+    	if (rightMotors < RobotMap.TELEOP_MIN_ROBOT_SPEED) {
+    		   
+    		rightMotors = RobotMap.TELEOP_MIN_ROBOT_SPEED;
+    		   
+    	}
     	Robot.driveTrain.setLeft(leftMotors);
     	Robot.driveTrain.setRight(rightMotors);
     }
