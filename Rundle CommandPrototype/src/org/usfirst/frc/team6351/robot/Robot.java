@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
+import org.usfirst.frc.team6351.robot.commands.AutoFollowContour;
 import org.usfirst.frc.team6351.robot.commands.AutoFwdSpinComeBack;
 import org.usfirst.frc.team6351.robot.commands.AutoTestMovement;
 import org.usfirst.frc.team6351.robot.commands.TankDrive;
@@ -41,6 +43,10 @@ public class Robot extends IterativeRobot {
     Command autonomousStart;
     Command teleopStart;
     SendableChooser autoMode;
+    
+	public static double centerYContour;
+	public static double centerXContour;
+	NetworkTable GRIPContourReport = NetworkTable.getTable("GRIP/blueSquare");
 
     /**
      * This function is run when the robot is first started up and should be
@@ -49,8 +55,9 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		autoMode = new SendableChooser();
-		autoMode.addDefault("ForwardSpinComeBack", new AutoFwdSpinComeBack());
-		autoMode.addObject("TEST MODE", new AutoTestMovement());
+		autoMode.addDefault("Auto: ForwardSpinReturn", new AutoFwdSpinComeBack());
+		autoMode.addObject("Auto: Follow GRIP Contour (Shape)", new AutoFollowContour());
+		autoMode.addObject("Auto: TEST MODE", new AutoTestMovement());
         SmartDashboard.putData("Auto mode", autoMode);
         pneumatics.start();
     }
@@ -99,6 +106,9 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
+    	
+    	getGRIP();
+    	
         Scheduler.getInstance().run();
     }
 
@@ -132,5 +142,41 @@ public class Robot extends IterativeRobot {
      */
     public void testPeriodic() {
         LiveWindow.run();
+    }
+    
+    public void getGRIP() {
+    	
+    	double[] yValue = new double[0];
+    	double[] xValue = new double[0];
+    	double[] widthValue = new double[0];
+    	
+    	int widthPos = 0;
+    	double[] dataArrayY = GRIPContourReport.getNumberArray("centerY", yValue);
+    	double[] dataArrayX = GRIPContourReport.getNumberArray("centerX", xValue);
+    	double[] dataArrayWidth = GRIPContourReport.getNumberArray("width", widthValue);
+    	
+    	for(int i = 0; i < dataArrayWidth.length; i++){
+    		
+    		if(dataArrayWidth[i] > dataArrayWidth[widthPos]){
+    			
+    			widthPos = i;
+    			
+    		}
+    		
+    	}
+    	//Getting a single double value from the array of centerY
+        if (dataArrayY.length > widthPos) {	
+    		centerYContour = dataArrayY[widthPos];
+        }
+    	//Getting a single double value from the array of centerX
+        if (dataArrayX.length > widthPos){
+        	centerXContour = dataArrayX[widthPos];
+        }
+    		
+		//Showing the value of centerY on the smart dashboard
+		SmartDashboard.putNumber("The value of centerY is ", centerYContour);
+		
+		//Showing the value of centerX on the smart dashboard
+		SmartDashboard.putNumber("The value of centerX is ", centerXContour);
     }
 }
