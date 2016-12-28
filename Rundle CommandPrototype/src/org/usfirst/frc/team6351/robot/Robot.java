@@ -156,19 +156,15 @@ public class Robot extends IterativeRobot {
     	double[] dataArrayWidth = GRIPContourReport.getNumberArray("width", widthValue);
     	
     	for(int i = 0; i < dataArrayWidth.length; i++){
-    		
     		if(dataArrayWidth[i] > dataArrayWidth[widthPos]){
-    			
     			widthPos = i;
-    			
     		}
-    		
     	}
-    	//Getting a single double value from the array of centerY
+    	//single double
         if (dataArrayY.length > widthPos) {	
     		centerYContour = dataArrayY[widthPos];
         }
-    	//Getting a single double value from the array of centerX
+    	//single double
         if (dataArrayX.length > widthPos){
         	centerXContour = dataArrayX[widthPos];
         }
