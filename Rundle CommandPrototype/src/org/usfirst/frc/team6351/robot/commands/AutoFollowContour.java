@@ -35,28 +35,31 @@ public class AutoFollowContour extends Command {
     	xPosition = Robot.centerXContour;
     	
     	double distance = centerX - xPosition;
+    
+    	if (xPosition != 0) {
+    		if (distance < 0.0 && distance > -160) {
+        		Robot.driveTrain.setLeft(-0.1);
+        		Robot.driveTrain.setRight(-0.1);
+        	} 
+        	if (distance < 0.0 && distance < -160) {
+        		Robot.driveTrain.setLeft(-0.3);
+        		Robot.driveTrain.setRight(-0.3);
+        	}
+        	if (distance > 0.0 && distance < 160) {
+        		Robot.driveTrain.setLeft(0.1);
+        		Robot.driveTrain.setRight(0.1);
+        	} 
+        	if (distance > 0.0 && distance > 160) {
+        		Robot.driveTrain.setLeft(0.3);
+        		Robot.driveTrain.setRight(0.3);
+        	}
+        	
+        	if (distance >= -5 && distance <= 5) {
+        		Robot.driveTrain.setLeft(0);
+        		Robot.driveTrain.setRight(0);
+        	}
+    	}
     	
-    	if (distance < 0.0 && distance > -160) {
-    		Robot.driveTrain.setLeft(-0.1);
-    		Robot.driveTrain.setRight(-0.1);
-    	} 
-    	if (distance < 0.0 && distance < -160) {
-    		Robot.driveTrain.setLeft(-0.3);
-    		Robot.driveTrain.setRight(-0.3);
-    	}
-    	if (distance > 0.0 && distance < 160) {
-    		Robot.driveTrain.setLeft(0.1);
-    		Robot.driveTrain.setRight(0.1);
-    	} 
-    	if (distance > 0.0 && distance > 160) {
-    		Robot.driveTrain.setLeft(0.3);
-    		Robot.driveTrain.setRight(0.3);
-    	}
-    	
-    	if (distance >= -5 && distance <= 5) {
-    		Robot.driveTrain.setLeft(0);
-    		Robot.driveTrain.setRight(0);
-    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
