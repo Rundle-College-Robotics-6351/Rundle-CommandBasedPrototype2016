@@ -128,13 +128,15 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.putNumber("Left Joystick Y", oi.driver1.getRawAxis(1));
-        SmartDashboard.putNumber("Right Joystick Y", oi.driver1.getRawAxis(3));
-        
         SmartDashboard.putBoolean("Compressor Enabled", pneumatics.getEnabled());
         SmartDashboard.putBoolean("Compressor Not Connected Fault", pneumatics.getConnectionFault());
         SmartDashboard.putBoolean("Compressor Current Fault", pneumatics.getCurrentFault());
         SmartDashboard.putBoolean("Compressor Shorted Fault", pneumatics.getShortFault());
+        
+        SmartDashboard.putNumber("Left Joystick Y", oi.driver1.getRawAxis(1));
+        SmartDashboard.putNumber("Right Joystick Y", oi.driver1.getRawAxis(3));
+        SmartDashboard.putBoolean("Precision Mode Active", oi.driverLeftBumper.get());
+        
     }
     
     /**
