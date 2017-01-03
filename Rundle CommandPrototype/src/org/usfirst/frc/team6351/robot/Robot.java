@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import org.usfirst.frc.team6351.robot.commands.AutoFollowContour;
 import org.usfirst.frc.team6351.robot.commands.AutoFwdSpinComeBack;
 import org.usfirst.frc.team6351.robot.commands.AutoTestMovement;
+import org.usfirst.frc.team6351.robot.commands.GTADrive;
 import org.usfirst.frc.team6351.robot.commands.TankDrive;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6351.robot.subsystems.Pneumatics;
@@ -53,6 +54,7 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	//System.load("/usr/local/lib/lib_OpenCV/java/opencv_java2410.so");
 		oi = new OI();
 		autoMode = new SendableChooser();
 		autoMode.addDefault("Auto: ForwardSpinReturn", new AutoFwdSpinComeBack());
@@ -60,6 +62,7 @@ public class Robot extends IterativeRobot {
 		autoMode.addObject("Auto: TEST MODE", new AutoTestMovement());
         SmartDashboard.putData("Auto mode", autoMode);
         pneumatics.start();
+        //sensors.gyro.calibrate();
     }
 	
 	/**
@@ -119,7 +122,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousStart != null) autonomousStart.cancel();
         
-        teleopStart = new TankDrive();
+        teleopStart = new GTADrive(); 
         teleopStart.start();
     }
 
@@ -136,6 +139,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Left Joystick Y", oi.driver1.getRawAxis(1));
         SmartDashboard.putNumber("Right Joystick Y", oi.driver1.getRawAxis(3));
         SmartDashboard.putBoolean("Precision Mode Active", oi.driverLeftBumper.get());
+        
+        SmartDashboard.putNumber("GyroAngle", sensors.getGyroAngle());
         
     }
     
