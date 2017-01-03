@@ -2,6 +2,7 @@
 package org.usfirst.frc.team6351.robot.subsystems;
 
 import org.usfirst.frc.team6351.robot.RobotMap;
+import org.usfirst.frc.team6351.robot.commands.GTADrive;
 import org.usfirst.frc.team6351.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.Victor;
@@ -32,7 +33,7 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new TankDrive());
+        setDefaultCommand(new GTADrive());
     }
     public void setLeft (double speed) {
     	frontLeft.set(speed);
