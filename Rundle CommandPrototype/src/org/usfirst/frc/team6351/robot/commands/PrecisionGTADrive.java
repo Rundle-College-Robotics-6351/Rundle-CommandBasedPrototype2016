@@ -26,6 +26,7 @@ public class PrecisionGTADrive extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.precisionActive = true;
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,8 +37,8 @@ public class PrecisionGTADrive extends Command {
     	double leftJoystickXAxis = Robot.oi.driverAxisValue(RobotMap.Controller1_Left_X_Axis);
     	   
     	//Creating motor variables
-    	double leftMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.GTA_Drive_Precision_Scaling_Teleop*(-1);
-    	double rightMotors = (rightTrigger - leftTrigger + leftJoystickXAxis)*RobotMap.GTA_Drive_Precision_Scaling_Teleop;
+    	double leftMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.GTA_Drive_Precision_Scaling_Teleop;
+    	double rightMotors = (rightTrigger - leftTrigger + leftJoystickXAxis)*RobotMap.GTA_Drive_Precision_Scaling_Teleop*(-1);
     	
     	
     	Robot.driveTrain.setLeft(leftMotors);
@@ -51,10 +52,12 @@ public class PrecisionGTADrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.precisionActive = false;
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.precisionActive = false;
     }
 }
