@@ -37,7 +37,7 @@ public class RobotMap {
 	
 	public static final int Solenoid_1 = 4;
 	public static final int Solenoid_2 = 3;
-	//WARNING! CONFIRM BEFORE RUNNING
+
 	public static final int Controller1_Left_Y_Axis = 1;
 	public static final int Controller1_Right_Y_Axis = 5;
 	
@@ -49,7 +49,7 @@ public class RobotMap {
 	
 	public static final int Controller1_Right_Bumper = 6;
 	public static final int Controller1_Left_Bumper = 5;
-	//---------------------------------
+
 	public static final int Controller1_A_Button = 1;
 	public static final int Controller1_B_Button = 2;
 	public static final int Controller1_X_Button = 3;
@@ -57,4 +57,7 @@ public class RobotMap {
 	
 	public static final double TELEOP_MAX_ROBOT_SPEED = 0.99;
 	public static final double TELEOP_MIN_ROBOT_SPEED = -0.99;
+	
+	public static final int IMG_WIDTH = 640;
+	public static final int IMG_HEIGHT = 480;
 }
