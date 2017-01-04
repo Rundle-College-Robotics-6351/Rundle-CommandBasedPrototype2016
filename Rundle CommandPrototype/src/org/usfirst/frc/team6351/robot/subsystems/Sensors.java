@@ -1,12 +1,11 @@
 package org.usfirst.frc.team6351.robot.subsystems;
 
-import edu.wpi.first.wpilibj.ADXL345_SPI;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.SPI;
+
 
 /**
  *
@@ -24,7 +23,7 @@ public class Sensors extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	public ADXRS450_Gyro gyro;
+	public Gyro gyro;
 	public Accelerometer accel;
 	
 	public Sensors() {
