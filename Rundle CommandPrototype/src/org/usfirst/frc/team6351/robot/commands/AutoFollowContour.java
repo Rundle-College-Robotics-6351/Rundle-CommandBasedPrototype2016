@@ -32,7 +32,7 @@ public class AutoFollowContour extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	xPosition = Robot.centerXContour;
+    	xPosition = Robot.centerX;
     	
     	double distance = centerX - xPosition;
     

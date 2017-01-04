@@ -1,23 +1,26 @@
 
 package org.usfirst.frc.team6351.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
-
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team6351.robot.commands.AutoFollowContour;
 import org.usfirst.frc.team6351.robot.commands.AutoFwdSpinComeBack;
 import org.usfirst.frc.team6351.robot.commands.AutoTestMovement;
 import org.usfirst.frc.team6351.robot.commands.GTADrive;
-import org.usfirst.frc.team6351.robot.commands.TankDrive;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6351.robot.subsystems.Pneumatics;
 import org.usfirst.frc.team6351.robot.subsystems.Sensors;
+import org.usfirst.frc.team6351.vision.GRIPblueBox;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.VisionThread;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -45,16 +48,31 @@ public class Robot extends IterativeRobot {
     Command teleopStart;
     SendableChooser autoMode;
     
-	public static double centerYContour;
-	public static double centerXContour;
-	NetworkTable GRIPContourReport = NetworkTable.getTable("GRIP/blueSquare");
+	double centerXContour;
+	public static double centerX;
+	Object imgLock = new Object();
+	
+	public static boolean precisionActive;
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	//System.load("/usr/local/lib/lib_OpenCV/java/opencv_java2410.so");
+    	precisionActive = false;
+    	
+    	UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+        camera.setResolution(RobotMap.IMG_WIDTH, RobotMap.IMG_HEIGHT);
+        
+        VisionThread vision = new VisionThread(camera, new GRIPblueBox(), pipeline -> {
+            if (!pipeline.filterContoursOutput().isEmpty()) {
+                Rect r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+                synchronized (imgLock) {
+                	centerXContour = r.x + (r.width / 2);
+                }
+            }
+        });
+        
 		oi = new OI();
 		autoMode = new SendableChooser();
 		autoMode.addDefault("Auto: ForwardSpinReturn", new AutoFwdSpinComeBack());
@@ -62,7 +80,6 @@ public class Robot extends IterativeRobot {
 		autoMode.addObject("Auto: TEST MODE", new AutoTestMovement());
         SmartDashboard.putData("Auto mode", autoMode);
         pneumatics.start();
-        //sensors.gyro.calibrate();
     }
 	
 	/**
@@ -109,8 +126,10 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	
-    	getGRIP();
+
+    	synchronized (imgLock) {
+    		centerX = this.centerXContour;
+    	}
     	
         Scheduler.getInstance().run();
     }
@@ -131,14 +150,16 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.putBoolean("Compressor Enabled", pneumatics.getEnabled());
-        SmartDashboard.putBoolean("Compressor Not Connected Fault", pneumatics.getConnectionFault());
-        SmartDashboard.putBoolean("Compressor Current Fault", pneumatics.getCurrentFault());
-        SmartDashboard.putBoolean("Compressor Shorted Fault", pneumatics.getShortFault());
+//        SmartDashboard.putBoolean("Compressor Enabled", pneumatics.getEnabled());
+//        SmartDashboard.putBoolean("Compressor Not Connected Fault", pneumatics.getConnectionFault());
+//        SmartDashboard.putBoolean("Compressor Current Fault", pneumatics.getCurrentFault());
+//        SmartDashboard.putBoolean("Compressor Shorted Fault", pneumatics.getShortFault());
         
         SmartDashboard.putNumber("Left Joystick Y", oi.driver1.getRawAxis(1));
         SmartDashboard.putNumber("Right Joystick Y", oi.driver1.getRawAxis(3));
-        SmartDashboard.putBoolean("Precision Mode Active", oi.driverLeftBumper.get());
+        SmartDashboard.putBoolean("Precision Mode Active", precisionActive);
+        
+        
         
         SmartDashboard.putNumber("GyroAngle", sensors.getGyroAngle());
         
@@ -151,35 +172,36 @@ public class Robot extends IterativeRobot {
         LiveWindow.run();
     }
     
-    public void getGRIP() {
-    	
-    	double[] yValue = new double[0];
-    	double[] xValue = new double[0];
-    	double[] widthValue = new double[0];
-    	
-    	int widthPos = 0;
-    	double[] dataArrayY = GRIPContourReport.getNumberArray("centerY", yValue);
-    	double[] dataArrayX = GRIPContourReport.getNumberArray("centerX", xValue);
-    	double[] dataArrayWidth = GRIPContourReport.getNumberArray("width", widthValue);
-    	
-    	for(int i = 0; i < dataArrayWidth.length; i++){
-    		if(dataArrayWidth[i] > dataArrayWidth[widthPos]){
-    			widthPos = i;
-    		}
-    	}
-    	//single double
-        if (dataArrayY.length > widthPos) {	
-    		centerYContour = dataArrayY[widthPos];
-        }
-    	//single double
-        if (dataArrayX.length > widthPos){
-        	centerXContour = dataArrayX[widthPos];
-        }
-    		
-		//Showing the value of centerY on the smart dashboard
-		SmartDashboard.putNumber("The value of centerY is ", centerYContour);
-		
-		//Showing the value of centerX on the smart dashboard
-		SmartDashboard.putNumber("The value of centerX is ", centerXContour);
-    }
+//    public void getGRIP() {
+//    	
+//    	double[] yValue = new double[0];
+//    	double[] xValue = new double[0];
+//    	double[] widthValue = new double[0];
+//    	
+//    	int widthPos = 0;
+//    	double[] dataArrayY = GRIPContourReport.getNumberArray("centerY", yValue);
+//    	double[] dataArrayX = GRIPContourReport.getNumberArray("centerX", xValue);
+//    	double[] dataArrayWidth = GRIPContourReport.getNumberArray("width", widthValue);
+//    	
+//    	for(int i = 0; i < dataArrayWidth.length; i++){
+//    		if(dataArrayWidth[i] > dataArrayWidth[widthPos]){
+//    			widthPos = i;
+//    		}
+//    	}
+//    	//single double
+//        if (dataArrayY.length > widthPos) {	
+//    		centerYContour = dataArrayY[widthPos];
+//        }
+//    	//single double
+//        if (dataArrayX.length > widthPos){
+//        	centerXContour = dataArrayX[widthPos];
+//        }
+//    		
+//		//Showing the value of centerY on the smart dashboard
+//		SmartDashboard.putNumber("The value of centerY is ", centerYContour);
+//		
+//		//Showing the value of centerX on the smart dashboard
+//		SmartDashboard.putNumber("The value of centerX is ", centerXContour);
+//    }
+
 }
