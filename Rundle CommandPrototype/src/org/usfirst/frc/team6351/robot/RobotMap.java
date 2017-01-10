@@ -60,4 +60,12 @@ public class RobotMap {
 	
 	public static final int IMG_WIDTH = 640;
 	public static final int IMG_HEIGHT = 480;
+	
+	//LogitechJoystick
+	
+	public static final int Joy_Y_Axis = 1;
+	public static final int Joy_X_Axis = 0;
+	
+	public static final int Joy_Button_11 = 11;
+	public static final int Joy_Button_12 = 12;
 }

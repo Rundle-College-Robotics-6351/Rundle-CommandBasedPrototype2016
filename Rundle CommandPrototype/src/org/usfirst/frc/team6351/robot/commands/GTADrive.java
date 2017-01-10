@@ -24,13 +24,19 @@ public class GTADrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	double rightTrigger = Robot.oi.driverAxisValue(RobotMap.Controller1_Right_Trigger);
-    	double leftTrigger = Robot.oi.driverAxisValue(RobotMap.Controller1_Left_Trigger);
-    	double leftJoystickXAxis = Robot.oi.driverAxisValue(RobotMap.Controller1_Left_X_Axis);
+//    	double rightTrigger = Robot.oi.driverAxisValue(RobotMap.Controller1_Right_Trigger);
+//    	double leftTrigger = Robot.oi.driverAxisValue(RobotMap.Controller1_Left_Trigger);
+//    	double leftJoystickXAxis = Robot.oi.driverAxisValue(RobotMap.Controller1_Left_X_Axis);
+    	
+    	double joystickX = Robot.oi.driverAxisValue(RobotMap.Joy_X_Axis);
+    	double joystickY = Robot.oi.driverAxisValue(RobotMap.Joy_Y_Axis);
     	   
     	//Creating motor variables
-    	double leftMotors = (rightTrigger - leftTrigger + leftJoystickXAxis)*RobotMap.GTA_Drive_Scaling_Teleop;
-    	double rightMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.GTA_Drive_Scaling_Teleop*(-1);
+//    	double leftMotors = (rightTrigger - leftTrigger + leftJoystickXAxis)*RobotMap.GTA_Drive_Scaling_Teleop;
+//    	double rightMotors = (rightTrigger - leftTrigger - leftJoystickXAxis)*RobotMap.GTA_Drive_Scaling_Teleop*(-1);
+    	
+    	double leftMotors = (joystickY - joystickX)*RobotMap.GTA_Drive_Scaling_Teleop*(-1);
+    	double rightMotors = (joystickY + joystickX)*RobotMap.GTA_Drive_Scaling_Teleop;
     	
     	if (leftMotors > RobotMap.TELEOP_MAX_ROBOT_SPEED) {
     		   
