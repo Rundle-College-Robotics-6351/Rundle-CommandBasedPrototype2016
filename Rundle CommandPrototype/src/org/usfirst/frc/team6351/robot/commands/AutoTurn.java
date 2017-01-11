@@ -3,7 +3,9 @@ package org.usfirst.frc.team6351.robot.commands;
 import org.usfirst.frc.team6351.robot.Robot;
 import org.usfirst.frc.team6351.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -24,17 +26,18 @@ public class AutoTurn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.sensors.gyro.reset();
     	currentAngle = Robot.sensors.getGyroAngle();
     	newAngle = currentAngle + angleChange;
-    	
+    	SmartDashboard.putNumber("NewAngle", newAngle);
     	if (newAngle >= 360) {
-    		newAngle = newAngle - 360;
+    		//newAngle = newAngle - 360;
     	}
     	
-    	if (newAngle > currentAngle){
+    	if (newAngle < currentAngle){
     		Robot.driveTrain.setLeft(RobotMap.Drive_Scaling_Auto*(-1));
     		Robot.driveTrain.setRight(RobotMap.Drive_Scaling_Auto*(-1));
-    	} else if (newAngle < currentAngle) {
+    	} else if (newAngle > currentAngle) {
     		Robot.driveTrain.setLeft(RobotMap.Drive_Scaling_Auto);
     		Robot.driveTrain.setRight(RobotMap.Drive_Scaling_Auto);
     	}
@@ -47,7 +50,7 @@ public class AutoTurn extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (newAngle >= Robot.sensors.getGyroAngle() - 1.5 && newAngle <= Robot.sensors.getGyroAngle() + 1.5) {
+    	if (newAngle >= Robot.sensors.getGyroAngle() - 2 && newAngle <= Robot.sensors.getGyroAngle() + 2) {
     		return true;
     	} else {
     		return false;
@@ -58,6 +61,7 @@ public class AutoTurn extends Command {
     protected void end() {
     	Robot.driveTrain.setLeft(0.0);
     	Robot.driveTrain.setRight(0.0);
+    	Timer.delay(2.0);
     }
 
     // Called when another command which requires one or more of the same

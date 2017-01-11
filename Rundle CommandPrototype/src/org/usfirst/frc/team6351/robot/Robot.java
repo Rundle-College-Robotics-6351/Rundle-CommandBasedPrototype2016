@@ -12,6 +12,7 @@ import org.opencv.imgproc.Imgproc;
 import org.usfirst.frc.team6351.robot.commands.AutoFollowContour;
 import org.usfirst.frc.team6351.robot.commands.AutoFwdSpinComeBack;
 import org.usfirst.frc.team6351.robot.commands.AutoTestMovement;
+import org.usfirst.frc.team6351.robot.commands.AutoTurn;
 import org.usfirst.frc.team6351.robot.commands.GTADrive;
 import org.usfirst.frc.team6351.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6351.robot.subsystems.Pneumatics;
@@ -46,7 +47,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousStart;
     Command teleopStart;
-    SendableChooser autoMode;
+    SendableChooser<Command> autoMode;
     
 	double centerXContour;
 	public static double centerX;
@@ -74,12 +75,14 @@ public class Robot extends IterativeRobot {
         });
         
 		oi = new OI();
-		autoMode = new SendableChooser();
-		autoMode.addDefault("Auto: ForwardSpinReturn", new AutoFwdSpinComeBack());
+		autoMode = new SendableChooser<Command>();
+		autoMode.addObject("Auto: ForwardSpinReturn", new AutoFwdSpinComeBack());
 		autoMode.addObject("Auto: Follow GRIP Contour (Shape)", new AutoFollowContour());
 		autoMode.addObject("Auto: TEST MODE", new AutoTestMovement());
+		autoMode.addDefault("Auto: Auto Turn 90", new AutoTurn(90));
         SmartDashboard.putData("Auto mode", autoMode);
         pneumatics.start();
+        
     }
 	
 	/**
@@ -130,6 +133,8 @@ public class Robot extends IterativeRobot {
     	synchronized (imgLock) {
     		centerX = this.centerXContour;
     	}
+    	
+    	SmartDashboard.putNumber("GyroAngle AUTO", sensors.getGyroAngle());
     	
         Scheduler.getInstance().run();
     }
